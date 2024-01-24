@@ -6,7 +6,7 @@ import TaskList from '../components/TaskList';
 function App() {
   return (
     <>
-      <h1>Proyecto Integrador - Listado de tareas</h1>
+      <h1>Proyecto Integrador - Listado de tareas</h1><br/><br/>
       <Header />
       <TaskList />
 
