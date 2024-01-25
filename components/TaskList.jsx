@@ -1,11 +1,11 @@
-// TaskList.jsx
 
 import React, { useState, useEffect } from "react";
 import Task from "./Task";
 import "./TaskList.css";
+import useTaskManager from "./useTaskManager"; //Importando el hook personalizado 
 
 function TaskList() {
-  const [tasks, setTasks] = useState(() => {
+  const { tasks, createTask, deleteTask, updateTask } = useTaskManager(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
@@ -19,30 +19,17 @@ function TaskList() {
   }, [tasks]);
 
   const toggleTaskCompletion = (taskId) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
-      )
-    );
+    updateTask(taskId, { isCompleted: !tasks.find((task) => task.id === taskId).isCompleted });
   };
 
   const addTask = () => {
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      {
-        id: prevTasks.length + 1,
-        title: newTaskTitle,
-        description: newTaskDescription,
-        isCompleted: false,
-      },
-    ]);
-
+    createTask(newTaskTitle, newTaskDescription);
     setNewTaskTitle("");
     setNewTaskDescription("");
   };
 
-  const deleteTask = (taskId) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  const deleteTaskHandler = (taskId) => {
+    deleteTask(taskId);
   };
 
   const startEditingTask = (taskId) => {
@@ -50,18 +37,8 @@ function TaskList() {
     setEditingTask(taskToEdit);
   };
 
-  const updateTask = () => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === editingTask.id
-          ? {
-              ...task,
-              title: editingTask.title,
-              description: editingTask.description,
-            }
-          : task
-      )
-    );
+  const updateTaskHandler = () => {
+    updateTask(editingTask.id, { title: editingTask.title, description: editingTask.description });
     setEditingTask(null);
   };
 
@@ -93,7 +70,7 @@ function TaskList() {
                   }
                   className="input-field"
                 />
-                <button onClick={updateTask} className="button">
+                <button onClick={updateTaskHandler} className="button">
                   Update
                 </button>
               </div>
@@ -107,7 +84,7 @@ function TaskList() {
                 />
                 <div className="task-actions">
                   <button
-                    onClick={() => deleteTask(task.id)}
+                    onClick={() => deleteTaskHandler(task.id)}
                     className="button"
                   >
                     Delete

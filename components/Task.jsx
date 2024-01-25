@@ -1,13 +1,15 @@
+// Task.jsx
+
 import React from 'react';
 
 function Task({ title, description, isCompleted, onToggle }) {
   return (
-    <div>
-      <div>
-        <span style={{ textDecoration: isCompleted ? 'line-through' : 'none' }}>{title}</span>
+    <div className="task">
+      <div className="task-details">
+        <span className={isCompleted ? 'completed' : ''}>{title}</span>
         <input type="checkbox" checked={isCompleted} onChange={onToggle} />
       </div>
-      <p>{description}</p>
+      {description && <p className="task-description">{description}</p>}
     </div>
   );
 }
