@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import Task from "./Task";
 import "./TaskList.css";
-import useTaskManager from "./useTaskManager"; //Importando el hook personalizado 
+import useTaskManager from "./useTaskManager";
 
 function TaskList() {
   const { tasks, createTask, deleteTask, updateTask } = useTaskManager(() => {
@@ -13,6 +12,7 @@ function TaskList() {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskDescription, setNewTaskDescription] = useState("");
   const [editingTask, setEditingTask] = useState(null);
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -23,9 +23,16 @@ function TaskList() {
   };
 
   const addTask = () => {
+    // Validación del formulario
+    if (newTaskTitle.length < 3) {
+      setFormError("El nombre de la tarea debe tener al menos 3 caracteres.");
+      return;
+    }
+
     createTask(newTaskTitle, newTaskDescription);
     setNewTaskTitle("");
     setNewTaskDescription("");
+    setFormError("");
   };
 
   const deleteTaskHandler = (taskId) => {
@@ -53,21 +60,14 @@ function TaskList() {
                 <input
                   type="text"
                   value={editingTask.title}
-                  onChange={(e) =>
-                    setEditingTask({ ...editingTask, title: e.target.value })
-                  }
+                  onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
                   className="input-field"
                 />
                 <label className="label">Description:</label>
                 <input
                   type="text"
                   value={editingTask.description}
-                  onChange={(e) =>
-                    setEditingTask({
-                      ...editingTask,
-                      description: e.target.value,
-                    })
-                  }
+                  onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
                   className="input-field"
                 />
                 <button onClick={updateTaskHandler} className="button">
@@ -83,16 +83,10 @@ function TaskList() {
                   onToggle={() => toggleTaskCompletion(task.id)}
                 />
                 <div className="task-actions">
-                  <button
-                    onClick={() => deleteTaskHandler(task.id)}
-                    className="button"
-                  >
+                  <button onClick={() => deleteTaskHandler(task.id)} className="button">
                     Delete
                   </button>
-                  <button
-                    onClick={() => startEditingTask(task.id)}
-                    className="button"
-                  >
+                  <button onClick={() => startEditingTask(task.id)} className="button">
                     Edit
                   </button>
                 </div>
@@ -122,6 +116,8 @@ function TaskList() {
         <button onClick={addTask} className="button">
           Add Task
         </button>
+
+        {formError && <p className="error-message">{formError}</p>}
       </div>
     </div>
   );
