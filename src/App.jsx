@@ -1,17 +1,24 @@
-import './App.css'
-import Header from '../components/Header'
-import TaskList from '../components/TaskList';
-
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "../components/Home";
+import Tareas from "../components/Tareas";
+import SobreNosotros from "../components/SobreNosotros";
+import Menu from "../components/Menu";
 
 function App() {
   return (
-    <>
-      <h1>Proyecto Integrador - Listado de tareas</h1><br/><br/>
-      <Header />
-      <TaskList />
+    <Router>
+      <div>
+        <Menu />
 
-    </>
-  )
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/tareas" element={<Tareas />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

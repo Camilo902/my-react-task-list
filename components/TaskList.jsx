@@ -23,7 +23,7 @@ function TaskList() {
   };
 
   const addTask = () => {
-    // Validación del formulario
+  
     if (newTaskTitle.length < 3) {
       setFormError("El nombre de la tarea debe tener al menos 3 caracteres.");
       return;
