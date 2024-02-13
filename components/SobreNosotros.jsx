@@ -55,6 +55,7 @@ function SobreNosotros() {
       </UnorderedList>
       <Text fontSize="lg" mb="4">
         Hemos desarrollado Task List utilizando tecnologías modernas, incluyendo React y React Router para una interfaz de usuario dinámica y una navegación eficiente entre páginas. La gestión del estado y la lógica de la aplicación se realiza con la ayuda de Hooks personalizados para un código limpio y modular.
+        Además, hemos integrado Chakra UI para un estilo consistente y atractivo.
       </Text>
       <Text fontSize="lg" mb="4">
         ¡Esperamos que Task List sea la herramienta perfecta para mejorar tu productividad y mantenerte organizado!
