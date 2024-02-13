@@ -1,5 +1,9 @@
-import "../src/Home.css"
+import { Heading } from "@chakra-ui/react"
 export default function Header (){
-    return <h2 className="heading">Task List</h2>
+    return <Heading as='h1' 
+                    size='4xl' 
+                    noOfLines={1} 
+                    color={"#0069a4"} 
+                    textAlign="center">Task List</Heading>
 };
 
