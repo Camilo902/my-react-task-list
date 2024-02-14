@@ -5,6 +5,7 @@ import Home from "../components/Home";
 import Tareas from "../components/Tareas";
 import SobreNosotros from "../components/SobreNosotros";
 import Menu from "../components/Menu";
+import DarkModeToggle from "../components/DarkMode";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Router>
         <div>
           <Menu />
+          <DarkModeToggle/>
 
           <Routes>
             <Route path="/" element={<Home />} />

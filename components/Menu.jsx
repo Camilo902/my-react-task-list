@@ -15,6 +15,7 @@ function Menu() {
         <Link as={RouterLink} to="/sobre-nosotros">
           Sobre Nosotros
         </Link>
+        
       </Box>
       <Spacer />
     </Flex>

@@ -1,4 +1,4 @@
-import { VStack, HStack, Input, Button, FormControl, FormLabel, FormErrorMessage, Flex } from "@chakra-ui/react";
+import { VStack, HStack, Input, Button, FormControl, FormLabel, FormErrorMessage, Flex, useColorModeValue } from "@chakra-ui/react";
 import Task from "./Task";
 import useTaskManager from "./useTaskManager";
 import React, { useState, useEffect } from "react";
